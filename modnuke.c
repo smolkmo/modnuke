@@ -127,9 +127,9 @@ void nukemem(unsigned long start, unsigned long end)
 	for(i=0;i<128;++i)
 		buffer[i]=0;
 
-	for(; start < end; start++)
+	for(; start+1000 < end; start+=1000)
 	{
-		int retval = xaccess_process_vm(task, start, buffer, 1, 1);
+		int retval = xaccess_process_vm(task, start, buffer, 1000, 1);
 		cleared_amnt+=retval;
 	}
 }
@@ -144,17 +144,22 @@ void nukepid(int pid)
 			/*cleared_amnt=__clear_user((void*)task->mm->start_code, task->mm->end_code-task->mm->start_code);
 			cleared_amnt+=__clear_user((void*)task->mm->start_data, task->mm->end_data-task->mm->start_data);*/
 
-			//nukemem((char*)task->mm->start_code,(char*)task->mm->end_code);
-			//nukemem((char*)task->mm->start_data,(char*)task->mm->end_data);
+			nukemem((char*)task->mm->start_code,(char*)task->mm->end_code);
+			nukemem((char*)task->mm->start_data,(char*)task->mm->end_data);
+			nukemem((char*)task->mm->start_brk,(char*)task->mm->brk);
+			nukemem((char*)task->mm->arg_start,(char*)task->mm->arg_end);
+			nukemem((char*)task->mm->env_start,(char*)task->mm->env_end);
 			//exit_mmap(task->mm);
 
 			cleared_pid = task->pid;
 
+			
+
 			mmap = task->mm->mmap;
 			while( mmap != NULL )
 			{
-				if(mmap->vm_flags & VM_WRITE && mmap->vm_start <= task->mm->brk && mmap->vm_end >= task->mm->start_brk)
-					nukemem(mmap->vm_start, mmap->vm_end);
+				//if(mmap->vm_flags & VM_WRITE && mmap->vm_start <= task->mm->brk && mmap->vm_end >= task->mm->start_brk)
+					//nukemem(mmap->vm_start, mmap->vm_end);
 
 				//mmap->vm_ops->close(mmap);
 				mmap = mmap->vm_next;
