@@ -1,19 +1,20 @@
-Do you run Linux and do you want to see the world burn?
+Do you run Linux, and do you want to see the world burn?
 
 ## modnuke
 
-modnuke is a Linux kernel module that can destroy processes by overwriting their precious allocated memory (code and data) with zeros.
+modnuke is a Linux kernel module that can destroy processes by overwriting their memory with zeros.
 
-Since it runs in kernel space, it also does not have to ask for permission.
+It is, by the very definition, to a process as the death star is to a planet.
 
-The motivation for this experiment is that "You should never try to kill init" is simply not a satisfying answer for the question "Why can't I kill init with the kill command?".
+Since it runs in kernel space, it does not have to ask for permission or check for sanity first. It just fires at whatever you point at it.
+
+It can also kill the process with PID 1.
 
 Consider using modnuke if you think that:
 
-* The "kill" command too soft
-* SIGNALs are the past
+* The "kill" command is too soft
+* SIGNALs are redundant
 * Your system is too stable
-* init (and possibly your whole system) must die
 
 WARNING: Using this is pretty much equal to poking a pissed bear with a stick. I do not understand the Linux kernel enough to tell you if/what things may go wrong! It will most likely cause bad things to happen, with data loss being the least of your worries. I advise against using this on a real system and cant be held accountable for the damage you inflict with modnuke. 
 
