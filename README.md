@@ -34,4 +34,4 @@ You need to have root priviledges to write to /proc/modnuke, so consider using:
 ```sudo bash -c "echo PID > /proc/modnuke"```
 
 ## License
-MIT
+GPL
