@@ -6,7 +6,7 @@ modnuke is a Linux kernel module that can destroy processes by overwriting their
 
 It is, by the very definition, to a process as the death star is to a planet.
 
-Since it runs in kernel space, it does not have to ask for permission or check for sanity first. It just fires at whatever you point at it.
+Since it runs in kernel space, it does not have to ask for permission or check for sanity first. It just fires at whatever you point it at.
 
 It can also kill the process with PID 1.
 
